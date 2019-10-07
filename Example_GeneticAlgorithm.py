@@ -1,6 +1,6 @@
 import numpy
 import ga
-
+import matplotlib.pyplot
 """
 The y=target is to maximize this equation ASAP:
     y = w1x1+w2x2+w3x3+w4x4+w5x5+6wx6
@@ -20,26 +20,19 @@ Genetic algorithm parameters:
     Mating pool size
     Population size
 """
-sol_per_pop = 8
-num_parents_mating = 4
+sol_per_pop = 16  # matching pool size 
+num_parents_mating = 2 # population size , or the number of parents mating
 
 # Defining the population size.
 pop_size = (sol_per_pop,num_weights) # The population will have sol_per_pop chromosome where each chromosome has num_weights genes.
+print("pop size is",pop_size)
 #Creating the initial population.
 new_population = numpy.random.uniform(low=-4.0, high=4.0, size=pop_size)
 print(new_population)
 
-"""
-new_population[0, :] = [2.4,  0.7, 8, -2,   5,   1.1]
-new_population[1, :] = [-0.4, 2.7, 5, -1,   7,   0.1]
-new_population[2, :] = [-1,   2,   2, -3,   2,   0.9]
-new_population[3, :] = [4,    7,   12, 6.1, 1.4, -4]
-new_population[4, :] = [3.1,  4,   0,  2.4, 4.8,  0]
-new_population[5, :] = [-2,   3,   -7, 6,   3,    3]
-"""
 
 best_outputs = []
-num_generations = 1000
+num_generations = 5000
 for generation in range(num_generations):
     print("Generation : ", generation)
     # Measuring the fitness of each chromosome in the population.
@@ -81,8 +74,7 @@ best_match_idx = numpy.where(fitness == numpy.max(fitness))
 print("Best solution : ", new_population[best_match_idx, :])
 print("Best solution fitness : ", fitness[best_match_idx])
 
-
-import matplotlib.pyplot
+#Graph goes here
 matplotlib.pyplot.plot(best_outputs)
 matplotlib.pyplot.xlabel("Iteration")
 matplotlib.pyplot.ylabel("Fitness")
